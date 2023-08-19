@@ -8,28 +8,28 @@ describe('API spec', () => {
 
     cy.request('POST', 'https://api.demoblaze.com/signup', {username: random, password: "MTIzNDU="}).then(
       (response) => {
-        expect(response.body).not.to.have.property('errorMessage', 'This user already exist.') // true
+        expect(response.body).not.to.have.property('errorMessage', 'This user already exist.')
       }
     )  })
 
   it('Usuario ya existente', () => {
     cy.request('POST', 'https://api.demoblaze.com/signup', {username: "natinati", password: "MTIzNDU="}).then(
       (response) => {
-        expect(response.body).to.have.property('errorMessage', 'This user already exist.') // true
+        expect(response.body).to.have.property('errorMessage', 'This user already exist.')
       }
     )  })
 
     it('Login correcto', () => {
-      cy.request('POST', 'https://api.demoblaze.com/login', {username: "victor", password: "MTIzNDU="}).then(
+      cy.request('POST', 'https://api.demoblaze.com/login', {username: "victortest", password: "MTIzNDU="}).then(
         (response) => {
-          expect(response.body).to.have.property('errorMessage', 'Wrong password.') // true
+          expect(response.body).not.to.have.property('errorMessage', 'Wrong password.')
         }
       )  })
 
     it('Login incorrecto', () => {
-      cy.request('POST', 'https://api.demoblaze.com/login', {username: "victor", password: "NTQzMjE="}).then(
+      cy.request('POST', 'https://api.demoblaze.com/login', {username: "victortest", password: "NTQzMjE="}).then(
         (response) => {
-          expect(response.body).to.have.property('errorMessage', 'Wrong password.') // true
+          expect(response.body).to.have.property('errorMessage', 'Wrong password.')
         }
       )  })
 })
